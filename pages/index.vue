@@ -1,39 +1,34 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        public-egg
-      </h1>
-      <h2 class="subtitle">
-        My good Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <ul>
+        <li v-for="item in items">
+          <img :src="`${item.imageSunnySideUp.url}?w=300`" alt="">
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import axios from "axios"
 
 export default {
-  components: {
-    Logo
+  data() {
+    return {
+      items: []
+    };
+  },
+  async asyncData() {
+    const { data } = await axios.get(
+      "https://gunkou.microcms.io/api/v1/sunny-side-up",
+      {
+        headers: { "X-API-KEY": process.env.API_KEY }
+      }
+    );
+    return {
+      items: data.contents
+    };
   }
 }
 </script>
@@ -48,25 +43,20 @@ export default {
   text-align: center;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+ul {
+  margin: 0;
+  padding: 0;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+li {
+  margin: 5px;
+  padding: 0;
+  list-style: none;
 }
 
-.links {
-  padding-top: 15px;
+img {
+  background: #d84f4f;
+  vertical-align: middle;
+  max-width: 100%;
 }
 </style>
