@@ -1,6 +1,6 @@
 <template>
   <header class="site-header">
-    <p class="site-header__logo">public egg</p>
+    <p class="site-header__logo">Public Egg</p>
   </header>
 </template>
 <style>
