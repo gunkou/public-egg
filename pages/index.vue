@@ -1,13 +1,9 @@
 <template>
-  <div class="container">
-    <div>
-      <ul>
-        <li v-for="item in items">
-          <img :src="`${item.imageSunnySideUp.url}?w=300`" alt="">
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ul>
+    <li v-for="item in items">
+      <img :src="`${item.imageSunnySideUp.url}?w=300`" alt="">
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -33,29 +29,18 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
+<style lang="scss">
 ul {
   margin: 0;
   padding: 0;
 }
-
 li {
   margin: 5px;
   padding: 0;
   list-style: none;
 }
-
 img {
-  background: #d84f4f;
+  border: 1px solid #ccc;
   vertical-align: middle;
   max-width: 100%;
 }

@@ -71,6 +71,7 @@ export default {
     text-align: center;
     position: relative;
     z-index: 10;
+    margin: 0;
   }
   &__button {
     position: absolute;
