@@ -1,18 +1,24 @@
+require("dotenv").config();
+const { API_KEY } = process.env;
 
 export default {
   mode: 'universal',
+  env: {
+    API_KEY
+  },
   /*
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '目玉焼き',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: '作った目玉焼きを載せています' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap&text=目玉焼き' }
     ]
   },
   /*

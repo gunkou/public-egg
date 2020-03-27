@@ -1,7 +1,7 @@
 <template>
   <header class="site-header">
     <div class="site-header__block">
-      <p class="site-header__logo">Public Egg</p>
+      <p class="site-header__logo">目玉焼き</p>
       <button
         v-on:click="siteNavShow = !siteNavShow"
         class="site-header__button"
@@ -65,14 +65,18 @@ export default {
   &__logo {
     display: block;
     color: #333;
-    font-size: 3em;
+    font-family: 'Kosugi Maru', sans-serif;
+    font-size: 2.4em;
     font-weight: bold;
     font-style: normal;
     text-align: center;
     position: relative;
     z-index: 10;
+    margin: 0;
   }
   &__button {
+    display: none; // 何もないので非表示
+    color: #333;
     position: absolute;
     z-index: 10;
     bottom: 50%;
@@ -84,6 +88,7 @@ export default {
     padding: 0.2em 0.8em;;
   }
   &__nav {
+    display: none; // 何もないので非表示
     position: relative;
     width: 100%;
     z-index: 5;

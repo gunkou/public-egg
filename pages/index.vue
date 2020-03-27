@@ -1,72 +1,65 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        public-egg
-      </h1>
-      <h2 class="subtitle">
-        My good Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+  <ul class="media-list">
+    <li class="media-list__item"
+    v-for="item in items"
+    :key="item.id">
+      <picture class="media">
+        <source :srcset="`
+        ${item.imageSunnySideUp.url}?fm=webp&w=400,
+        ${item.imageSunnySideUp.url}?fm=webp&w=400&dpr=2 2x
+        `"
+        type="image/webp">
+        <img class="media__img" :src="`${item.imageSunnySideUp.url}?w=800`" alt="">
+      </picture>
+    </li>
+  </ul>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import axios from "axios"
 
 export default {
-  components: {
-    Logo
+  data() {
+    return {
+      items: []
+    };
+  },
+  async asyncData() {
+    const { data } = await axios.get(
+      "https://gunkou.microcms.io/api/v1/sunny-side-up",
+      {
+        headers: { "X-API-KEY": process.env.API_KEY }
+      }
+    );
+    return {
+      items: data.contents
+    };
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
+<style lang="scss">
+.media-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 400px);
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  grid-row-gap: 2rem;
+  grid-column-gap: 2rem;
+  &__item {
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.media {
+  &__img {
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 </style>
