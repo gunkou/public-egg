@@ -1,10 +1,12 @@
 require("dotenv").config();
+import axios from 'axios'
 const { API_KEY } = process.env;
 
 export default {
   mode: 'universal',
   env: {
-    API_KEY
+    API_KEY,
+    LIMIT: 4
   },
   /*
   ** Headers of the page
@@ -48,6 +50,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '~/modules/hook.js',
   ],
   /*
   ** Axios module configuration
@@ -63,6 +66,29 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    },
+    postcss: {
+      preset: {
+        autoprefixer: {
+          grid: true
+        }
+      }
+    }
+  },
+  generate: {
+    routes () {
+      return axios.get('https://gunkou.microcms.io/api/v1/sunny-side-up', {
+        headers: { 'X-API-KEY': process.env.API_KEY }
+      }).then((res) => {
+        const limit = this.env.LIMIT;
+        const totalCount = res.data.totalCount;
+        const allPages = Math.ceil(totalCount / limit);
+        const result = [];
+        for (let i = 2; i <= allPages; ++i) {
+          result.push(`/page/${i}`);
+        }
+        return result;
+      })
     }
   }
 }
