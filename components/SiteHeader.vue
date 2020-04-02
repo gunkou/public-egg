@@ -4,12 +4,13 @@
       <p class="site-header__logo">目玉焼き</p>
 
       <button
-      v-on:click="siteNavShow = !siteNavShow"
-      tabindex="0"
-      class="site-header__button menu-trigger"
-      aria-controls="site-header-nav-panel"
-      :aria-expanded="siteNavShow ? 'true' : 'false'"
-      :class="{'menu-trigger--open': siteNavShow}">
+        v-on:click="siteNavShow = !siteNavShow"
+        tabindex="0"
+        class="site-header__button menu-trigger"
+        aria-controls="site-header-nav-panel"
+        :aria-expanded="siteNavShow ? 'true' : 'false'"
+        :class="{'menu-trigger--open': siteNavShow}"
+      >
         <span class="menu-trigger__line"></span>
         <span class="menu-trigger__line"></span>
         <span class="menu-trigger__line"></span>
@@ -19,7 +20,10 @@
 
     </div>
 
-    <transition name="fade" @after-enter="transitionComplete">
+    <transition name="fade"
+      v-on:after-enter="afterEnter"
+      v-on:after-leave="afterLeave"
+    >
     <div class="site-header__nav"
      id="site-header-nav-panel"
      aria-labelledby="site-header-nav-hook"
@@ -53,8 +57,11 @@ export default {
     this.documentElement = documentElement;
   },
   methods: {
-    transitionComplete: function () {
-      this.documentElement.setAttribute('data-scroll-disabled', this.siteNavShow);
+    afterEnter: function () {
+        this.documentElement.setAttribute('data-scroll-disabled', true);
+    },
+    afterLeave: function () {
+        this.documentElement.setAttribute('data-scroll-disabled', false);
     }
   }
 }
