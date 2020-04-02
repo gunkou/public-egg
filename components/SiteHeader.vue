@@ -22,7 +22,7 @@
     <div class="site-header__nav"
      id="site-header-nav-panel"
      aria-labelledby="site-header-nav-hook"
-     v-show="siteNavShow">
+     v-if="siteNavShow">
      <div class="site-header-nav-body">
        <div class="site-header-nav-body__main">
         <nav class="site-header-nav">
@@ -138,7 +138,7 @@ export default {
     box-sizing: border-box;
     position: absolute;
     left: 0;
-    width: 90%;
+    width: 80%;
     height: 2px;
     background-color: #333;
     border-radius: 8px;
