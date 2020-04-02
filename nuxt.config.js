@@ -1,7 +1,7 @@
 require("dotenv").config();
 import axios from 'axios'
 const { API_KEY } = process.env;
-const LIMIT = 4;
+const LIMIT = 6;
 
 export default {
   mode: 'universal',
