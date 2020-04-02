@@ -2,27 +2,28 @@
   <header class="site-header">
     <div class="site-header__block">
       <p class="site-header__logo">目玉焼き</p>
+
       <button
-        v-on:click="siteNavShow = !siteNavShow"
-        class="site-header__button menu-trigger"
-        id="site-header-nav-hook"
-        tabindex="0"
-        aria-controls="site-header-nav-panel"
-        :aria-expanded="siteNavShow ? 'true' : 'false'"
-        :class="{'menu-trigger--open': siteNavShow}">
-          <span class="menu-trigger__line"></span>
-          <span class="menu-trigger__line"></span>
-          <span class="menu-trigger__line"></span>
-          <span class="menu-trigger__text" v-if="siteNavShow">close</span>
-          <span class="menu-trigger__text" v-else>open</span>
+      v-on:click="siteNavShow = !siteNavShow"
+      tabindex="0"
+      class="site-header__button menu-trigger"
+      aria-controls="site-header-nav-panel"
+      :aria-expanded="siteNavShow ? 'true' : 'false'"
+      :class="{'menu-trigger--open': siteNavShow}">
+        <span class="menu-trigger__line"></span>
+        <span class="menu-trigger__line"></span>
+        <span class="menu-trigger__line"></span>
+        <span class="menu-trigger__text" v-if="siteNavShow">close</span>
+        <span class="menu-trigger__text" v-else>open</span>
       </button>
+
     </div>
 
-    <transition name="fade">
+    <transition name="fade" @after-enter="transitionComplete">
     <div class="site-header__nav"
      id="site-header-nav-panel"
      aria-labelledby="site-header-nav-hook"
-     v-if="siteNavShow">
+     v-show="siteNavShow">
      <div class="site-header-nav-body">
        <div class="site-header-nav-body__main">
         <nav class="site-header-nav">
@@ -51,9 +52,9 @@ export default {
     documentElement.setAttribute('data-scroll-disabled', this.siteNavShow);
     this.documentElement = documentElement;
   },
-  watch: {
-    siteNavShow: function (val, oldVal) {
-      this.documentElement.setAttribute('data-scroll-disabled', val);
+  methods: {
+    transitionComplete: function () {
+      this.documentElement.setAttribute('data-scroll-disabled', this.siteNavShow);
     }
   }
 }
@@ -115,13 +116,14 @@ export default {
   grid-template-rows: 1fr auto;
 }
 .menu-trigger {
+  $rootOpen: [];
+
   width: 2.4em;
   height: 2.4em;
   color: #333;
   background: none;
   font-size: 1em;
   padding: 0.2em 0.8em;;
-  transition: transform .4s;
   border: 0;
   &:focus {
     outline: none;
@@ -131,27 +133,39 @@ export default {
     color: transparent;
   }
   &--open {
-    transform: rotate(-90deg);
+    $rootOpen: &;
   }
   &__line {
+    $lineW: 70%;
+
     display: inline-block;
     box-sizing: border-box;
     position: absolute;
     left: 0;
-    width: 80%;
+    width: $lineW;
     height: 2px;
     background-color: #333;
     border-radius: 8px;
+    transition: width .4s;
     &:nth-of-type(1) {
       top: 0;
+      #{$rootOpen} & {
+        width: 100%;
+      }
     }
     &:nth-of-type(2) {
       bottom: 50%;
       transform: translateY(50%);
       width: 100%;
+      #{$rootOpen} & {
+        width: $lineW;
+      }
     }
     &:nth-of-type(3) {
       bottom: 0;
+      #{$rootOpen} & {
+        width: 100%;
+      }
     }
   }
 }
@@ -168,5 +182,6 @@ html[data-scroll-disabled="true"] body {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+  width: 100%;
 }
 </style>
