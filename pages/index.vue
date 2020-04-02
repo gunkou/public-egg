@@ -73,8 +73,7 @@ export default {
 
     // offsetを元に戻す
     const pageNumber = offset + 1;
-    // TOPも含めるので-1
-    const allPages = Math.ceil(data.totalCount / 3) - 1;
+    const allPages = Math.ceil(data.totalCount / limit);
 
     return {
       items: data.contents,
