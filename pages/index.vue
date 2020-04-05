@@ -4,7 +4,7 @@
     <li class="media-list__item"
     v-for="item in items"
     :key="item.id">
-      <picture class="media">
+      <picture class="media" @click="openModal(item)" tabindex="0">
         <source :srcset="`
         ${item.imageSunnySideUp.url}?fm=webp&w=400,
         ${item.imageSunnySideUp.url}?fm=webp&w=400&dpr=2 2x
@@ -15,41 +15,28 @@
     </li>
   </ul>
 
-  <div class="pager">
-    <p class="pager__text">{{pageNumber}} / {{allPages}}</p>
-    <ul class="pager__link">
-      <li class="pager__prev"
-      v-if="pageNumber === 2">
-        <nuxt-link to="/">
-        前
-        </nuxt-link>
-      </li>
-      <li class="pager__prev"
-      v-if="pageNumber !== 1 && pageNumber !== 2">
-        <nuxt-link :to="`/page/${pageNumber - 1}`">
-        前
-        </nuxt-link>
-      </li>
-      <li class="pager__next"
-      v-if="pageNumber < allPages">
-        <nuxt-link :to="`/page/${pageNumber + 1}`">
-        次
-        </nuxt-link>
-      </li>
-    </ul>
-  </div>
+  <MediaDetails :val="postItem" v-if="showModal" @close="closeModal"></MediaDetails>
+  <Pager :pageNumber="pageNumber" :allPages="allPages"></Pager>
 </div>
 </template>
 
 <script>
 import axios from "axios";
+import Pager from "~/components/Pager";
+import MediaDetails from "~/components/MediaDetails";
 
 export default {
+  components: {
+    Pager,
+    MediaDetails
+  },
   data() {
     return {
       items: [],
       pageNumber: 1,
-      allPages: 0
+      allPages: 0,
+      showModal: false,
+      postItem: '',
     };
   },
   async asyncData({route}) {
@@ -80,7 +67,16 @@ export default {
       pageNumber: pageNumber,
       allPages: allPages
     };
-  }
+  },
+  methods: {
+    openModal(item) {
+      this.postItem = item;
+      this.showModal = true;
+  },
+    closeModal() {
+      this.showModal = false;
+    }
+  },
 }
 </script>
 
@@ -103,35 +99,39 @@ export default {
   }
 }
 .media {
+  border: 1px solid #ccc;
+  display: block;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+  &::before {
+    content:"";
+    display: block;
+    padding-top: 66.666667%;
+  }
   &__img {
-    border: 1px solid #ccc;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     vertical-align: middle;
     max-width: 100%;
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover;
   }
 }
-.pager {
-  margin: 0;
-  padding: 2rem 1rem;
-  text-align: center;
-  &__text {
-    margin: 0 0 0.5rem 0;
-  }
-  &__link {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-  }
-  &__prev,
-  &__next {
-    margin: 0;
-    padding: 0 0.5rem;
-    &:empty {
-      display: none;
-    }
-  }
+.btn {
+  display: block;
+  background: none;
+  border: 0;
+  position: relative;
+  text-decoration: underline;
+  padding: 0;
 }
 </style>
