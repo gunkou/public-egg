@@ -2,15 +2,15 @@
   <div class="modal modal-overlay" @click.self="$emit('close')">
     <div class="modal-window">
       <div class="modal-content">
-        <picture class="media-details">
-          <source :srcset="`${val.imageSunnySideUp.url}?fm=webp&fit=crop&w=900&h=900`" type="image/webp">
-          <img :src="`${val.imageSunnySideUp.url}?fit=crop&w=900&h=900`" alt="" width="570" height="570">
-        </picture>
-
+        <div class="media-details">
+          <picture class="media-details__image">
+            <source :srcset="`${val.imageSunnySideUp.url}?fm=webp&fit=crop&rect=415,180,570,570&q=100`" type="image/webp">
+            <img :src="`${val.imageSunnySideUp.url}?fm=webp&fit=crop&rect=415,180,570,570&q=100`" alt="">
+          </picture>
+        </div>
         <p class="date">{{ val.dateCreate | dateFormat }}</p>
-
         <button @click="$emit('close')" class="btn">
-          Close
+          <span>Close</span>
         </button>
       </div>
     </div>
@@ -55,6 +55,8 @@ export default {
     background: #fff;
     overflow: hidden;
     position: relative;
+    width: 100%;
+    max-width: calc(570px + 4rem);
   }
   &-content {
     padding: 2rem;
@@ -62,15 +64,34 @@ export default {
   }
 }
 .media-details {
+  position: relative;
+  width: 100%;
   display: block;
-  text-align: center;
-  img {
+  &::before {
+    content:"";
+    display: block;
+    padding-top: 100%;
+  }
+  &__image {
+    display: block;
+    text-align: center;
     max-width: 570px;
     max-height: 570px;
     width: 100%;
     height: 100%;
-    object-fit: none;
     border: 1px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    img {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+    }
   }
 }
 .btn {
@@ -83,20 +104,31 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  &::before,
-  &::after{
-    content: "";
+  span {
     display: block;
-    width: 22px;
-    height: 3px;
-    background: #333;
-    transform: rotate(45deg);
+    width: 2rem;
+    height: 2rem;
+    padding: 3px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
     position: absolute;
-    top: 10px;
+    top: 0;
     right: 0;
-  }
-  &::after{
-      transform: rotate(-45deg);
+    &::before,
+    &::after{
+      content: "";
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #333;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 13px;
+      right: 0;
+    }
+    &::after{
+        transform: rotate(-45deg);
+    }
   }
   &:focus {
     outline: none;
