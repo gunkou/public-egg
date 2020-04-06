@@ -5,7 +5,7 @@
         <div class="media-details">
           <picture class="media-details__image">
             <source :srcset="`${val.imageSunnySideUp.url}?fm=webp&fit=crop&rect=415,180,570,570&q=100`" type="image/webp">
-            <img :src="`${val.imageSunnySideUp.url}?fm=webp&fit=crop&rect=415,180,570,570&q=100`" alt="">
+            <img :src="`${val.imageSunnySideUp.url}?fit=crop&rect=415,180,570,570&q=100`" alt="">
           </picture>
         </div>
         <p class="date">{{ val.dateCreate | dateFormat }}</p>
@@ -48,7 +48,6 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    padding: 2rem;
     box-sizing: border-box;
   }
   &-window {
