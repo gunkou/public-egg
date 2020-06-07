@@ -4,7 +4,7 @@
     <div class="switch">
       <div class="switch__title">cols</div>
       <label class="switch__label">
-        <input class="switch__input" type="checkbox" @click="changeGridStyle">
+        <input class="switch__input" type="checkbox" :checked="isGridStyle" @change="changeGridStyle">
         <span class="switch__slider"></span>
         <span class="switch__text switch__text--col1">1</span>
         <span class="switch__text switch__text--col2">2</span>
@@ -36,6 +36,13 @@
 import axios from "axios";
 import Pager from "~/components/Pager";
 import MediaDetails from "~/components/MediaDetails";
+
+/**
+ * 文字列("true", "false")をboolean型に変換する
+ */
+function toBoolean (str) {
+  return str.toLowerCase() === 'true';
+}
 
 export default {
   components: {
@@ -81,6 +88,11 @@ export default {
       allPages: allPages
     };
   },
+  mounted() {
+    if (sessionStorage.isGridStyle) {
+      this.isGridStyle = toBoolean(sessionStorage.isGridStyle);
+    }
+  },
   methods: {
     openModal(item) {
       this.postItem = item;
@@ -91,6 +103,7 @@ export default {
     },
     changeGridStyle: function(event) {
       this.isGridStyle = !this.isGridStyle;
+      sessionStorage.isGridStyle = this.isGridStyle;
     }
   },
 }
@@ -166,8 +179,6 @@ export default {
     display: block;
   }
 }
-
-
 .switch {
   $slider: "";
 
