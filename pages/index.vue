@@ -1,9 +1,15 @@
 <template>
 <div>
   <div class="media-style-change">
-    <button class="media-style-change__btn" @click="changeGridStyle">
-      <span>1/2</span>
-    </button>
+    <div class="switch">
+      <div class="switch__title">cols</div>
+      <label class="switch__label">
+        <input class="switch__input" type="checkbox" @click="changeGridStyle">
+        <span class="switch__slider"></span>
+        <span class="switch__text switch__text--col1">1</span>
+        <span class="switch__text switch__text--col2">2</span>
+      </label>
+    </div>
   </div>
 
   <ul class="media-list" v-bind:class="{ 'media-list--sp-col2': isGridStyle }">
@@ -155,16 +161,76 @@ export default {
 .media-style-change {
   text-align: center;
   display: none;
+  margin: 0 0 1rem 0;
   @media (max-width: 768px) {
     display: block;
   }
-  &__btn {
-    background: 0;
-    border: 1px solid #ccc;
-    padding: 0.4rem 0;
-    margin: 0 0 1rem 0;
-    line-height: 1;
-    min-width: 4rem;
+}
+
+
+.switch {
+  $slider: "";
+
+  &__title {
+    display: block;
+    margin: 0 0 0.1rem 0;
+  }
+  &__label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  &__slider {
+    $slider: &;
+
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+    &::before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: #fff;
+      transition: .4s;
+      z-index: 2;
+      border-radius: 50%;
+    }
+  }
+  &__input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked + #{$slider} {
+      // background-color: #2196F3;
+    }
+    &:focus + #{$slider} {
+      // box-shadow: 0 0 1px #2196F3;
+    }
+    &:checked + #{$slider}::before {
+      transform: translateX(26px);
+    }
+  }
+  &__text {
+    position: absolute;
+    top: 10px;
+    z-index: 0;
+    font-size: 12px;
+    &--col1 {
+      right: 10px;
+    }
+    &--col2 {
+      left: 10px;
+    }
   }
 }
 </style>
