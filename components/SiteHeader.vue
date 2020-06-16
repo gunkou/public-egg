@@ -32,6 +32,7 @@
        <div class="site-header-nav-body__main">
         <nav class="site-header-nav">
           <p class="site-header-nav__text">素敵な目玉焼きを目指して、今まで作った目玉焼きを掲載しています。</p>
+          <p class="site-header-nav__text site-header-nav__text--note">注意：<br>訪問状況を把握するために<a target="_blank" href="https://marketingplatform.google.com/intl/ja/about/analytics/">Google Analytics</a>を利用しています。Google Analyticsはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、特定の個人を識別する情報は一切含まれません。</p>
         </nav>
        </div>
        <div class="site-header-nav-body__footer">
@@ -115,6 +116,10 @@ export default {
 .site-header-nav {
   &__text {
     line-height: 1.6;
+    &--note {
+      color: #666;
+      font-size: 0.8em;;
+    }
   }
 }
 .site-header-nav-body {
