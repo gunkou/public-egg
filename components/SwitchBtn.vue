@@ -1,12 +1,12 @@
 
 <template>
   <div class="switch">
-    <div class="switch__title">cols</div>
+    <div class="switch__title">{{ label }}</div>
     <label class="switch__label">
       <input class="switch__input"
       type="checkbox"
-      :checked="isGridStyle"
-      @change="$emit('change-grid-style', false)"
+      :checked="isSwitch"
+      @change="$emit('change-switcher', false)"
       >
       <span class="switch__slider"></span>
       <span class="switch__text switch__text--col1">1</span>
@@ -17,7 +17,10 @@
 
 <script>
 export default {
-  props: ['isGridStyle']
+  props: {
+    isSwitch: Boolean,
+    label: String
+  }
 }
 </script>
 

@@ -2,8 +2,9 @@
 <div>
   <div class="media-style-change">
     <SwitchBtn
-     v-bind:isGridStyle="isGridStyle"
-     v-on:change-grid-style="changeGridStyle"
+     label="cols"
+     v-bind:is-switch="isGridStyle"
+     v-on:change-switcher="changeGridStyle"
      ></SwitchBtn>
   </div>
 
