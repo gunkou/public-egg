@@ -1,6 +1,14 @@
 <template>
 <div>
-  <ul class="media-list">
+  <div class="media-style-change">
+    <SwitchBtn
+     label="cols"
+     v-bind:is-switch="isGridStyle"
+     v-on:change-switcher="changeGridStyle"
+     ></SwitchBtn>
+  </div>
+
+  <ul class="media-list" v-bind:class="{ 'media-list--sp-col2': isGridStyle }">
     <li class="media-list__item"
     v-for="item in items"
     :key="item.id">
@@ -24,11 +32,20 @@
 import axios from "axios";
 import Pager from "~/components/Pager";
 import MediaDetails from "~/components/MediaDetails";
+import SwitchBtn from "~/components/SwitchBtn";
+
+/**
+ * 文字列("true", "false")をboolean型に変換する
+ */
+function toBoolean (str) {
+  return str.toLowerCase() === 'true';
+}
 
 export default {
   components: {
     Pager,
-    MediaDetails
+    MediaDetails,
+    SwitchBtn
   },
   data() {
     return {
@@ -37,6 +54,7 @@ export default {
       allPages: 0,
       showModal: false,
       postItem: '',
+      isGridStyle: false
     };
   },
   async asyncData({route}) {
@@ -68,13 +86,22 @@ export default {
       allPages: allPages
     };
   },
+  mounted() {
+    if (sessionStorage.isGridStyle) {
+      this.isGridStyle = toBoolean(sessionStorage.isGridStyle);
+    }
+  },
   methods: {
     openModal(item) {
       this.postItem = item;
       this.showModal = true;
-  },
+    },
     closeModal() {
       this.showModal = false;
+    },
+    changeGridStyle: function(event) {
+      this.isGridStyle = !this.isGridStyle;
+      sessionStorage.isGridStyle = this.isGridStyle;
     }
   },
 }
@@ -88,14 +115,22 @@ export default {
   padding: 0 1.6rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));
-  justify-content: center;
   grid-row-gap: 2rem;
   grid-column-gap: 2rem;
+  justify-content: center;
   &__item {
     box-sizing: border-box;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  &--sp-col2 {
+    @media (max-width: 768px) {
+      padding: 0;
+      grid-template-columns: repeat(auto-fit, minmax(min-content, 47vw));
+      grid-row-gap: 2vw;
+      grid-column-gap: 2vw;
+    }
   }
 }
 .media {
@@ -133,5 +168,13 @@ export default {
   position: relative;
   text-decoration: underline;
   padding: 0;
+}
+.media-style-change {
+  text-align: center;
+  display: none;
+  margin: 0 0 1rem 0;
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 </style>
