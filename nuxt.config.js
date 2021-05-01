@@ -21,7 +21,9 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap&text=目玉焼き' }
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Kosugi+Maru&display=swap&text=目玉焼き' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap' }
     ]
   },
   /*
@@ -32,7 +34,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'normalize.css'
+    'normalize.css',
+    '@/assets/typesetting.scss'
   ],
   /*
   ** Plugins to load before mounting the App
