@@ -1,0 +1,25 @@
+.site-root {
+  max-width: calc(#{$width-container} + #{$width-col__gap * 2 });
+  margin: 0 auto;
+
+  @media screen and (min-width: $min-vw) {
+    padding: 0 $width-col__gap;
+  }
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: $width-row 1fr $width-row;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+  &__header {
+    grid-area: header;
+  }
+  &__footer {
+    grid-area: footer;
+  }
+  &__main {
+    grid-area: main;
+  }
+}

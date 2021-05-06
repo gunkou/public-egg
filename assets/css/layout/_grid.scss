@@ -1,7 +1,4 @@
 .container {
-  max-width: calc(#{$width-container} + #{$width-col__gap * 2 });
-  padding: 0 $width-col__gap;
-  margin: $width-row__gap auto;
   .grid {
     margin: $width-row__gap 0;
     display: grid;

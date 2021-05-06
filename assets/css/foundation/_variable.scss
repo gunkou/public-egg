@@ -13,5 +13,5 @@ $width-row: ((7.7em * 4) * 2) / 3;
 // col * 14
 $width-container: $width-col__gap * 14;
 
-$max-vw: 7.7rem * 16;
-$min-vw: 7.7rem * 6;
+$max-vw: 7.7rem * 16; // $width-col * 3 + $width-col__gap * 4
+$min-vw: 7.7rem * 6;  // $width-col * 1 + $width-col__gap * 2
