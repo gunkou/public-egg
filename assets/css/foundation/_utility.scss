@@ -1,0 +1,8 @@
+// line-height $fs:文字サイズ $fh:行送りの数値
+@mixin line-height ($fs, $fh){
+  line-height: $fh / $fs;
+}
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}

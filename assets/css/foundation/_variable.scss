@@ -1,0 +1,17 @@
+$font-size-h1: 6.4em;
+$font-size-h2: 3.2em;
+$font-size-h3: 2.133em;
+$font-size-base: 1.6em;
+$font-size-small: 1.28em;
+
+$width-col__gap: 7.7em;
+$width-row__gap: 7.7em;
+// 3:2の比率
+$width-col: 7.7em * 4;
+$width-row: ((7.7em * 4) * 2) / 3;
+
+// col * 14
+$width-container: $width-col__gap * 14;
+
+$max-vw: 7.7rem * 16;
+$min-vw: 7.7rem * 6;

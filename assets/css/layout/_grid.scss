@@ -1,0 +1,46 @@
+.container {
+  max-width: calc(#{$width-container} + #{$width-col__gap * 2 });
+  padding: 0 $width-col__gap;
+  margin: $width-row__gap auto;
+  .grid {
+    margin: $width-row__gap 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: $width-col__gap;
+    row-gap: $width-row__gap;
+    grid-auto-rows: $width-row;
+  }
+  .col {
+    background: rgb(231, 231, 231);
+    overflow: hidden;
+    &--3 {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    &--2 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+  .row-2 {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+  .row-3 {
+    grid-row-start: 1;
+    grid-row-end: 4;
+  }
+  &.debug .col {
+    background-image: linear-gradient( 90deg , transparent 99%, rgb(255, 2, 2) 1% );
+    background-size: $width-col__gap;
+    background-repeat: repeat;
+  }
+}
+
+.one-line {
+  width: 100%;
+  line-height: 1;
+  height: 1em;
+  overflow: hidden;
+  margin: 1rem 0;
+}

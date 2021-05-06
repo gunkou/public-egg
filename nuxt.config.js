@@ -35,7 +35,7 @@ export default {
   */
   css: [
     'normalize.css',
-    '@/assets/typesetting.scss'
+    '@/assets/css/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
