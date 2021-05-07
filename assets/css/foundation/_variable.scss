@@ -16,3 +16,10 @@ $width-container: $width-col * 3 + $width-col__gap * 2;
 
 $max-width: $width-container + $width-col__gap * 2;
 $min-width: $width-col + $width-col__gap * 2;
+
+$spacing-unit: $default-size / 8;
+$spacing-x-small: $spacing-unit;
+$spacing-small: $spacing-unit * 2;
+$spacing-medium: $spacing-unit * 3;
+$spacing-large: $spacing-unit * 5;
+$spacing-x-large: $spacing-unit * 8;

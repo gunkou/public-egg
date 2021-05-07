@@ -1,5 +1,5 @@
 <template>
-<div class="container debug">
+<div class="debug">
   <div class="grid">
     <div class="col col--3">
       <h1 class="one-line">{{ dummyText }}</h1>
@@ -143,6 +143,15 @@
     <div class="col">
       <small>{{ dummyText }}</small>
     </div>
+  </div>
+
+  <div class="spacing">
+    <p class="one-line spacing-x-large">spacing-x-large{{ dummyText }}</p>
+    <p class="one-line spacing-large">spacing-large{{ dummyText }}</p>
+    <p class="one-line spacing-medium">spacing-medium{{ dummyText }}</p>
+    <p class="one-line spacing-small">spacing-small{{ dummyText }}</p>
+    <p class="one-line spacing-x-small">spacing-x-small{{ dummyText }}</p>
+    <p class="one-line spacing-0">{{ dummyText }}</p>
   </div>
 </div>
 </template>
