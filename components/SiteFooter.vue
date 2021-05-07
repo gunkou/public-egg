@@ -13,8 +13,6 @@ export default {
 
 <style lang="scss">
 .site-footer {
-  font-size: 1rem;
-  padding: 3rem 1rem;
   &__copy {
     display: block;
     font-style: normal;

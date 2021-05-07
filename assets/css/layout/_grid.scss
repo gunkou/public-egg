@@ -1,11 +1,13 @@
 .container {
   .grid {
-    margin: $width-row__gap 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: $width-col__gap;
     row-gap: $width-row__gap;
     grid-auto-rows: $width-row;
+    & + .grid {
+      margin: $width-row__gap 0 0;
+    }
   }
   .col {
     background: rgb(231, 231, 231);

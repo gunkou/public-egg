@@ -74,9 +74,6 @@ export default {
   position: relative;
   font-size: 1rem;
   line-height: 1;
-  &__block {
-    padding: 2em 1.6em;
-  }
   &__logo {
     display: block;
     color: #333;

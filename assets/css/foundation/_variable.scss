@@ -1,17 +1,18 @@
-$font-size-h1: 6.4em;
-$font-size-h2: 3.2em;
-$font-size-h3: 2.133em;
-$font-size-base: 1.6em;
-$font-size-small: 1.28em;
+$default-size: 77px;
+$default-size--em: 7.7em;
 
-$width-col__gap: 7.7em;
-$width-row__gap: 7.7em;
-// 3:2の比率
-$width-col: 7.7em * 4;
-$width-row: ((7.7em * 4) * 2) / 3;
+$font-size-h1: 64px;
+$font-size-h2: 32px;
+$font-size-h3: 21.33px;
+$font-size-base: 16px;
+$font-size-small: 12.8px;
 
-// col * 14
-$width-container: $width-col__gap * 14;
+$width-col: $default-size--em * 4;
+$width-row: ($width-col * 2) / 3; // colに対して3:2の比率
+$width-col__gap: $default-size--em;
+$width-row__gap: $default-size--em;
+$width-gutter: $default-size--em;
+$width-container: $width-col * 3 + $width-col__gap * 2;
 
-$max-vw: 7.7rem * 16; // $width-col * 3 + $width-col__gap * 4
-$min-vw: 7.7rem * 6;  // $width-col * 1 + $width-col__gap * 2
+$max-width: $width-container + $width-col__gap * 2;
+$min-width: $width-col + $width-col__gap * 2;

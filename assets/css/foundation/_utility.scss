@@ -1,8 +1,12 @@
-// line-height $fs:文字サイズ $fh:行送りの数値
-@mixin line-height ($fs, $fh){
-  line-height: $fh / $fs;
-}
-
 @function strip-unit($value) {
   @return $value / ($value * 0 + 1);
+}
+
+@function to-em($intended-size-px, $parent-element-calculated-px: 10) {
+  @return #{strip-unit($intended-size-px) / $parent-element-calculated-px}em;
+}
+
+// line-height $fs:文字サイズ $fh:行送りの数値
+@mixin line-height ($fs, $fh){
+  line-height: $fh / strip-unit($fs);
 }
