@@ -70,33 +70,70 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~/assets/css/foundation/_variable";
+@import "~/assets/css/foundation/_utility";
+
 .site-header {
   position: relative;
-  font-size: 1rem;
-  line-height: 1;
   &__logo {
     display: block;
     color: #333;
     font-family: 'Kosugi Maru', sans-serif;
-    font-size: 2.4em;
     font-weight: bold;
     font-style: normal;
-    text-align: center;
-    position: relative;
-    z-index: 10;
+    font-size: to-em($font-size-h3);
+    letter-spacing: 0.2em;
+    line-height: 1;
     margin: 0;
+    z-index: 10;
+    position: fixed;
+    @include mq(s) {
+      writing-mode: vertical-rl;
+      text-orientation: sideways;
+      left: 0;
+      top: to-vw($width-gutter--sp);
+    }
+    @include mq(landscape) {
+      top: to-em($width-gutter--sp, $font-size-h3);
+    }
+    @include mq() {
+      margin-left: 2em;
+      position: relative;
+      top: to-em(2px, $font-size-h3);
+    }
   }
   &__button {
-    position: absolute;
+    position: fixed;
     z-index: 10;
-    top: 2em;
+    bottom: to-vw($width-gutter--sp);
     left: 0;
+    @include mq(landscape) {
+      bottom: to-em($width-gutter--sp);
+    }
+    @include mq() {
+      position: absolute;
+      top: 0;
+      bottom: auto;
+    }
   }
   &__nav {
-    position: relative;
     z-index: 5;
-    padding: 1.6em;
-    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: to-vw($width-header--sp + $width-gutter--sp);
+    width: to-vw($width-col-4--sp);
+    padding: to-vw($width-gutter--sp) 0 to-vw($width-gutter--sp) 0;
+    @include mq(landscape) {
+      left: to-em($width-header--sp + $width-gutter--sp);
+      width: to-em($width-col-4--sp);
+      padding: to-em($width-gutter--sp) 0 to-em($width-gutter--sp) 0;
+    }
+    @include mq() {
+      position: relative;
+      padding: $width-gutter 0 0 0;
+      width: 100%;
+      left: 0;
+    }
     &::after {
       position: absolute;
       z-index: -1;
@@ -112,17 +149,23 @@ export default {
 }
 .site-header-nav {
   &__text {
-    line-height: 1.6;
     &--note {
       color: #666;
-      font-size: 0.8em;;
+      margin-top: to-vw($spacing-medium);
+      @include mq(landscape) {
+        margin-top: to-em($spacing-medium);
+      }
     }
   }
 }
 .site-header-nav-body {
   min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  &__footer {
+    margin-top: to-vw($spacing-x-large);
+    @include mq(landscape) {
+      margin-top: to-em($spacing-x-large);
+    }
+  }
 }
 .menu-trigger {
   $rootOpen: [];
@@ -191,6 +234,5 @@ html[data-scroll-disabled="true"] body {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-  width: 100%;
 }
 </style>

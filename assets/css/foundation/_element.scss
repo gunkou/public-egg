@@ -12,7 +12,7 @@ body {
   $max-font: 1;
 
   font-size: #{$max-font}rem;
-  @media screen and (min-width: $min-width) {
+  @include mq() {
     font-size: clamp(
       #{$min-font}rem,
       calc(#{$min-font}rem + #{$max-font - $min-font} * ((100vw - #{$min-vw}rem) / #{$max-vw - $min-vw})),
@@ -53,7 +53,7 @@ h3 {
   margin: 0;
 }
 
-p {
+p,li,dt,dd {
   @include line-height($font-size-base, 23.2);
   font-size: to-em($font-size-base);
   letter-spacing: 0.2em;

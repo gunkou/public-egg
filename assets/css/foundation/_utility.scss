@@ -6,7 +6,18 @@
   @return #{strip-unit($intended-size-px) / strip-unit($parent-element-calculated-px)}em;
 }
 
+// デザインを375pxで作成しているので、$viewportは375px
+@function to-vw($size-px, $viewport: 375px) {
+  @return #{$size-px / $viewport * 100}vw;
+}
+
 // line-height $fs:文字サイズ $fh:行送りの数値
 @mixin line-height ($fs, $fh){
   line-height: $fh / strip-unit($fs);
+}
+
+@mixin mq($breakpoint: l) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
 }
