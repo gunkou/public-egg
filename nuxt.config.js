@@ -1,7 +1,7 @@
 require("dotenv").config();
 import axios from 'axios'
 const { API_KEY } = process.env;
-const LIMIT = 6;
+const LIMIT = 5; // 画像の取得枚数
 
 export default {
   mode: 'universal',

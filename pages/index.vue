@@ -1,13 +1,5 @@
 <template>
 <div>
-  <div class="media-style-change">
-    <SwitchBtn
-     label="cols"
-     v-bind:is-switch="isGridStyle"
-     v-on:change-switcher="changeGridStyle"
-     ></SwitchBtn>
-  </div>
-
   <ul class="media-list" v-bind:class="{ 'media-list--sp-col2': isGridStyle }">
     <li class="media-list__item"
     v-for="item in items"
@@ -21,10 +13,20 @@
         <img class="media__img" :src="`${item.imageSunnySideUp.url}?w=800`" alt="">
       </picture>
     </li>
+    <li class="media-list__item">
+      <div class="media-style-change">
+        <SwitchBtn
+        label="cols"
+        v-bind:is-switch="isGridStyle"
+        v-on:change-switcher="changeGridStyle"
+        ></SwitchBtn>
+      </div>
+
+      <Pager :pageNumber="pageNumber" :allPages="allPages"></Pager>
+    </li>
   </ul>
 
   <MediaDetails :val="postItem" v-if="showModal" @close="closeModal"></MediaDetails>
-  <Pager :pageNumber="pageNumber" :allPages="allPages"></Pager>
 </div>
 </template>
 
@@ -108,28 +110,41 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~/assets/css/foundation/_variable";
+@import "~/assets/css/foundation/_utility";
+
 .media-list {
-  box-sizing: border-box;
   text-align: center;
   margin: 0;
-  padding: 0 1.6rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));
-  grid-row-gap: 2rem;
-  grid-column-gap: 2rem;
+  padding: 0;
   justify-content: center;
+  display: grid;
+  grid-column-gap: to-vw($width-col__gap--sp);
+  grid-row-gap: to-vw($width-row__gap--sp);
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, to-vw($width-col-4--sp)));
+  @include mq() {
+    grid-column-gap: $width-col__gap;
+    grid-row-gap: $width-row__gap;
+    grid-auto-rows: $width-row;
+    grid-template-columns: repeat(auto-fit, minmax(min-content, $width-col));
+  }
   &__item {
-    box-sizing: border-box;
     list-style: none;
     margin: 0;
     padding: 0;
   }
   &--sp-col2 {
-    @media (max-width: 768px) {
-      padding: 0;
-      grid-template-columns: repeat(auto-fit, minmax(min-content, 47vw));
-      grid-row-gap: 2vw;
-      grid-column-gap: 2vw;
+    @include mq(s) {
+      grid-template-columns: to-vw($width-col-2--sp) to-vw($width-col-2--sp);
+      grid-row-gap: to-vw($width-row__gap--sp);
+      grid-column-gap: to-vw($width-col__gap--sp);
+    }
+    @include mq() {
+      grid-column-gap: $width-col__gap;
+      grid-row-gap: $width-row__gap;
+      grid-auto-rows: $width-row;
+      grid-template-columns: repeat(auto-fit, minmax(min-content, $width-col));
     }
   }
 }
@@ -172,8 +187,8 @@ export default {
 .media-style-change {
   text-align: center;
   display: none;
-  margin: 0 0 1rem 0;
-  @media (max-width: 768px) {
+  margin: 0;
+  @include mq(s) {
     display: block;
   }
 }

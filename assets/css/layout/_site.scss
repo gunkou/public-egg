@@ -1,26 +1,54 @@
 .site-root {
   max-width: calc(#{$width-container} + #{$width-col__gap * 2 });
-  margin: $width-gutter auto;
+  margin:  0 auto;
+  padding: 0 to-vw($width-gutter--sp) 0 0;
+  display: grid;
+  grid-template-columns: to-vw($width-header--sp) 1fr;
+  grid-template-rows: 1fr to-vw($width-row--sp);
+  gap: 16px 16px;
+  grid-template-areas:
+    "header main"
+    "header footer";
 
-  @media screen and (min-width: $min-width) {
-    padding: 0 $width-col__gap;
+  @include mq(landscape) {
+    padding: 0 to-em($width-gutter--sp) 0 0;
+    grid-template-columns: to-em($width-header--sp) 1fr;
+    grid-template-rows: 1fr to-em($width-row--sp);
   }
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: $width-row 1fr $width-row;
-  row-gap: $width-row__gap;
-  grid-template-areas:
-    'header'
-    'main'
-    'footer';
+  @include mq() {
+    margin: $width-gutter auto;
+    padding: 0 $width-col__gap;
+    grid-template-columns: 1fr;
+    grid-template-rows: $width-row 1fr $width-row;
+    row-gap: $width-row__gap;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+  }
   &__header {
     grid-area: header;
   }
   &__footer {
     grid-area: footer;
+    align-self: end;
+    padding: 0 0 to-vw($width-gutter--sp) 0;
+    @include mq(landscape) {
+      padding: 0 0 to-em($width-gutter--sp) 0;
+    }
+    @include mq() {
+      padding: 0;
+    }
   }
   &__main {
     grid-area: main;
+    padding: to-vw($width-gutter--sp) 0 0 0;
+    @include mq(landscape) {
+      padding: to-em($width-gutter--sp) 0 0 0;
+    }
+    @include mq() {
+      padding: 0;
+    }
   }
 }

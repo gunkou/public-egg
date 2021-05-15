@@ -33,3 +33,11 @@ $spacing-small: $spacing-unit * 2;
 $spacing-medium: $spacing-unit * 3;
 $spacing-large: $spacing-unit * 5;
 $spacing-x-large: $spacing-unit * 8;
+
+
+$breakpoints: (
+  'l': 'screen and (min-width: #{$min-width})',
+  's': 'screen and (max-width: #{$min-width})',
+  'landscape': '(orientation: landscape)', // 横
+  'portrait': '(orientation: portrait)' // 縦
+);

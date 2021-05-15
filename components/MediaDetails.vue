@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/foundation/_variable";
+@import "~/assets/css/foundation/_utility";
+
 .modal {
   &.modal-overlay {
     display: flex;
@@ -47,8 +50,8 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
+    background: rgba(#fff, 0.4);
+    backdrop-filter: blur(4px);
   }
   &-window {
     background: #fff;
@@ -56,20 +59,37 @@ export default {
     position: relative;
     width: 100%;
     max-width: calc(570px + 4rem);
+    box-shadow: 0px 0px 18px 2px rgba(#000, 0.1);
   }
   &-content {
-    padding: 2rem;
-    box-sizing: border-box;
+    padding: to-vw($width-gutter--sp);
+    @include mq(landscape) {
+      padding: to-em($width-gutter--sp);
+    }
+    @include mq() {
+      padding: 2em;
+    }
   }
 }
 .media-details {
   position: relative;
-  width: 100%;
   display: block;
+  margin: 0 0 0 auto;
+  width: to-vw($width-col-4--sp);
+  @include mq() {
+    margin: 0;
+    width: 100%;
+  }
   &::before {
     content:"";
     display: block;
     padding-top: 100%;
+    @include mq(landscape) {
+      padding-top: calc(100vh - #{to-em($width-gutter--sp)} * 2);
+    }
+    @include mq() {
+      padding-top: 100%;
+    }
   }
   &__image {
     display: block;
@@ -78,14 +98,20 @@ export default {
     max-height: 570px;
     width: 100%;
     height: 100%;
-    border: 1px solid #ccc;
-    padding: 5px;
-    box-sizing: border-box;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+    @include mq(landscape) {
+      width: calc(100vh - #{to-em($width-gutter--sp)} * 2);
+      height: calc(100vh - #{to-em($width-gutter--sp)} * 2);
+      margin: auto;
+    }
+    @include mq() {
+      width: 100%;
+      height: 100%;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -108,8 +134,6 @@ export default {
     width: 2rem;
     height: 2rem;
     padding: 3px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
     position: absolute;
     top: 0;
     right: 0;
@@ -122,7 +146,7 @@ export default {
       background: #333;
       transform: rotate(45deg);
       position: absolute;
-      top: 13px;
+      top: 8px;
       right: 0;
     }
     &::after{
@@ -135,6 +159,13 @@ export default {
 }
 .date {
   text-align: center;
-  margin-bottom: 0;
+  margin: to-em($spacing-small) 0 0 0;
+  @include mq(s) {
+    position: absolute;
+    left: 0;
+    bottom: to-vw($width-gutter--sp);
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+  }
 }
 </style>
