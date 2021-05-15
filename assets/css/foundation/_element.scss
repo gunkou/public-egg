@@ -1,0 +1,69 @@
+html {
+  font-size: 62.5%;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  color: #333;
+}
+
+body {
+  $max-vw: strip-unit($max-width);
+  $min-vw: strip-unit($min-width);
+  $min-font: strip-unit(10 / $font-size-small); // $font-size-smallが10pxになるとき
+  $max-font: 1;
+
+  font-size: #{$max-font}rem;
+  @media screen and (min-width: $min-width) {
+    font-size: clamp(
+      #{$min-font}rem,
+      calc(#{$min-font}rem + #{$max-font - $min-font} * ((100vw - #{$min-vw}rem) / #{$max-vw - $min-vw})),
+      #{$max-font}rem
+    );
+  }
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1 {
+  @include line-height($font-size-h1, 69.5);
+  font-size: to-em($font-size-h1);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+h2 {
+  @include line-height($font-size-h2, 42);
+  font-size: to-em($font-size-h2);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+h3 {
+  @include line-height($font-size-h3, 29.5);
+  font-size: to-em($font-size-h3);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+p {
+  @include line-height($font-size-base, 23.2);
+  font-size: to-em($font-size-base);
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+small {
+  @include line-height($font-size-small, 18.0);
+  font-size: to-em($font-size-small);
+  letter-spacing: 0.2em;
+  margin: 0;
+  display: block;
+}

@@ -1,5 +1,5 @@
 <template>
-  <header class="site-header">
+  <header :class="className" class="site-header">
     <div class="site-header__block">
       <p class="site-header__logo">目玉焼き</p>
 
@@ -46,6 +46,7 @@
 
 <script>
 export default {
+  props: ['className'],
   data() {
     return {
       siteNavShow: false,
@@ -73,10 +74,6 @@ export default {
   position: relative;
   font-size: 1rem;
   line-height: 1;
-  height: 7em; // &__blockのpadding 4em + &__logoのfont-size 3em
-  &__block {
-    padding: 2em 1.6em;
-  }
   &__logo {
     display: block;
     color: #333;

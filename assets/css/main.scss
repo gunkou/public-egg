@@ -1,0 +1,43 @@
+@import "./foundation/_variable";
+@import "./foundation/_utility";
+@import "./foundation/_element";
+@import "./layout/_grid";
+@import "./layout/_site";
+
+
+.debug {
+  .col {
+    background-image: linear-gradient( 90deg , transparent 99%, rgb(255, 2, 2) 1% );
+    background-size: $width-col__gap;
+    background-repeat: repeat;
+  }
+
+  .one-line {
+    width: 100%;
+    line-height: 1;
+    height: 1em;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+  .spacing {
+    margin: to-em($spacing-x-large) 0 0 0;
+  }
+  .spacing-x-large {
+    margin: 0 0 to-em($spacing-x-large, $font-size-base) 0;
+  }
+  .spacing-large {
+    margin: 0 0 to-em($spacing-large, $font-size-base) 0;
+  }
+  .spacing-medium {
+    margin: 0 0 to-em($spacing-medium, $font-size-base) 0;
+  }
+  .spacing-small {
+    margin: 0 0 to-em($spacing-small, $font-size-base) 0;
+  }
+  .spacing-x-small {
+    margin: 0 0 to-em($spacing-x-small, $font-size-base) 0;
+  }
+  .spacing-0 {
+    margin: 0;
+  }
+}

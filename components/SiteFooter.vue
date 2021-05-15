@@ -1,13 +1,18 @@
 <template>
-  <footer class="site-footer">
+  <footer :class="className" class="site-footer">
     <small  class="site-footer__copy">(c) 2020 Public Egg</small>
   </footer>
 </template>
 
+
+<script>
+export default {
+  props: ['className']
+}
+</script>
+
 <style lang="scss">
 .site-footer {
-  font-size: 1rem;
-  padding: 3rem 1rem;
   &__copy {
     display: block;
     font-style: normal;
